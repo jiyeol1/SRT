@@ -49,6 +49,9 @@
             this.btnChangeStation = new System.Windows.Forms.Button();
             this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.cbVIPRoom = new System.Windows.Forms.CheckBox();
+            this.cbNormalRoom = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnRun
@@ -240,11 +243,48 @@
             this.dtEnd.TabIndex = 26;
             this.dtEnd.Value = new System.DateTime(2023, 12, 7, 15, 43, 58, 0);
             // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(248, 240);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(202, 53);
+            this.btnStop.TabIndex = 27;
+            this.btnStop.Text = "STOP";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // cbVIPRoom
+            // 
+            this.cbVIPRoom.AutoSize = true;
+            this.cbVIPRoom.Checked = true;
+            this.cbVIPRoom.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbVIPRoom.Location = new System.Drawing.Point(375, 87);
+            this.cbVIPRoom.Name = "cbVIPRoom";
+            this.cbVIPRoom.Size = new System.Drawing.Size(72, 16);
+            this.cbVIPRoom.TabIndex = 28;
+            this.cbVIPRoom.Text = "특실예매";
+            this.cbVIPRoom.UseVisualStyleBackColor = true;
+            // 
+            // cbNormalRoom
+            // 
+            this.cbNormalRoom.AutoSize = true;
+            this.cbNormalRoom.Checked = true;
+            this.cbNormalRoom.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbNormalRoom.Location = new System.Drawing.Point(375, 112);
+            this.cbNormalRoom.Name = "cbNormalRoom";
+            this.cbNormalRoom.Size = new System.Drawing.Size(72, 16);
+            this.cbNormalRoom.TabIndex = 29;
+            this.cbNormalRoom.Text = "일반예매";
+            this.cbNormalRoom.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(473, 305);
+            this.Controls.Add(this.cbNormalRoom);
+            this.Controls.Add(this.cbVIPRoom);
+            this.Controls.Add(this.btnStop);
             this.Controls.Add(this.dtEnd);
             this.Controls.Add(this.dtStart);
             this.Controls.Add(this.btnChangeStation);
@@ -297,6 +337,9 @@
         private System.Windows.Forms.Button btnChangeStation;
         private System.Windows.Forms.DateTimePicker dtStart;
         private System.Windows.Forms.DateTimePicker dtEnd;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.CheckBox cbVIPRoom;
+        private System.Windows.Forms.CheckBox cbNormalRoom;
     }
 }
 
