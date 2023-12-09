@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -79,6 +80,7 @@ namespace SRT_Ticketor
 
         public IWebDriver openBrowser()
         {
+            string[] week_days = { "(일)", "(월)", "(화)", "(수)", "(목)", "(금)", "(토)"};
             IWebDriver driver = new ChromeDriver();
             try
             {
@@ -103,11 +105,13 @@ namespace SRT_Ticketor
 
                 driver.FindElement(By.Id("arvRsStnCdNm")).Clear();
                 driver.FindElement(By.Id("arvRsStnCdNm")).SendKeys(ArrivalStation);
+
+                //string date = dtReserve.ToString("yyyy'/'MM'/'dd") + week_days[(int)dtReserve.DayOfWeek];
                 string date = dtReserve.ToString("yyyyMMdd");
-                if(date != DateTime.Now.ToString("yyyyMMdd"))
-                {
-                    driver.FindElement(By.Id("dptDt")).SendKeys(date);
-                }
+
+                SelectElement dropDown = new SelectElement(driver.FindElement(By.Id("dptDt")));//.SendKeys(date);
+                dropDown.SelectByValue(date);
+                
                 string searchHour = $"{((StartHour % 2 != 0) ? (StartHour - 1) : StartHour).ToString("00")}0000";
                 driver.FindElement(By.Id("dptTm")).SendKeys(searchHour);
 
