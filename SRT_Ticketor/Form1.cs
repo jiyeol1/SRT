@@ -13,6 +13,7 @@ using OpenQA.Selenium.Support.UI;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Telegram.Bot;
 
 namespace SRT_Ticketor
 {
@@ -32,6 +33,10 @@ namespace SRT_Ticketor
         protected System.Threading.Thread runThread = null;
         private IWebDriver webDriver = null;
 
+        private const string telegramToken = "6749783435:AAGTBALpcBtpVzGunDflPQIb7XWGbkIwHnM";
+        private const string chatID = "6428946348";
+        //https://api.telegram.org/bot6749783435:AAGTBALpcBtpVzGunDflPQIb7XWGbkIwHnM/getUpdates
+        //접속해 본인의 chat ID찾아 입력하기
         #endregion
 
         #region Properties
@@ -68,6 +73,12 @@ namespace SRT_Ticketor
         private void btnStop_Click(object sender, EventArgs e)
         {
             stopThread = true;
+        }
+
+        private void Telegram_SendMessage(string chatID, string message)
+        {
+            TelegramBotClient botClient = new TelegramBotClient(telegramToken);
+            botClient.SendTextMessageAsync(chatID, message);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -233,6 +244,7 @@ namespace SRT_Ticketor
                     }
                     System.Threading.Thread.Sleep(2000);
                     WebDriver.Quit();
+                    Telegram_SendMessage(chatID, "SRT Ticket 예약 완료!");
                     MessageBox.Show("예약 완료!");
                     break;
                 }
