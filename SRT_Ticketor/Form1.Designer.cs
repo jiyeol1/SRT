@@ -59,7 +59,7 @@
             this.btnRun.Location = new System.Drawing.Point(24, 240);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(202, 53);
-            this.btnRun.TabIndex = 0;
+            this.btnRun.TabIndex = 10;
             this.btnRun.Text = "RUN";
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
@@ -85,16 +85,18 @@
             // tbID
             // 
             this.tbID.Location = new System.Drawing.Point(110, 23);
+            this.tbID.MaxLength = 11;
             this.tbID.Name = "tbID";
             this.tbID.Size = new System.Drawing.Size(116, 21);
-            this.tbID.TabIndex = 3;
+            this.tbID.TabIndex = 1;
             // 
             // tbPW
             // 
             this.tbPW.Location = new System.Drawing.Point(110, 52);
+            this.tbPW.MaxLength = 30;
             this.tbPW.Name = "tbPW";
             this.tbPW.Size = new System.Drawing.Size(116, 21);
-            this.tbPW.TabIndex = 4;
+            this.tbPW.TabIndex = 2;
             this.tbPW.UseSystemPasswordChar = true;
             // 
             // label3
@@ -113,8 +115,8 @@
             this.dtPicker.Location = new System.Drawing.Point(110, 82);
             this.dtPicker.Name = "dtPicker";
             this.dtPicker.Size = new System.Drawing.Size(101, 21);
-            this.dtPicker.TabIndex = 6;
-            this.dtPicker.Value = new System.DateTime(2023, 12, 7, 15, 43, 58, 0);
+            this.dtPicker.TabIndex = 3;
+            this.dtPicker.Value = new System.DateTime(2023, 12, 8, 0, 0, 0, 0);
             // 
             // label4
             // 
@@ -191,18 +193,18 @@
             // tbDepart
             // 
             this.tbDepart.Location = new System.Drawing.Point(277, 52);
-            this.tbDepart.MaxLength = 2;
+            this.tbDepart.MaxLength = 7;
             this.tbDepart.Name = "tbDepart";
             this.tbDepart.Size = new System.Drawing.Size(63, 21);
-            this.tbDepart.TabIndex = 21;
+            this.tbDepart.TabIndex = 6;
             // 
             // tbArrival
             // 
             this.tbArrival.Location = new System.Drawing.Point(397, 52);
-            this.tbArrival.MaxLength = 2;
+            this.tbArrival.MaxLength = 7;
             this.tbArrival.Name = "tbArrival";
             this.tbArrival.Size = new System.Drawing.Size(63, 21);
-            this.tbArrival.TabIndex = 22;
+            this.tbArrival.TabIndex = 7;
             // 
             // label14
             // 
@@ -218,7 +220,7 @@
             this.btnChangeStation.Location = new System.Drawing.Point(346, 52);
             this.btnChangeStation.Name = "btnChangeStation";
             this.btnChangeStation.Size = new System.Drawing.Size(43, 23);
-            this.btnChangeStation.TabIndex = 24;
+            this.btnChangeStation.TabIndex = 12;
             this.btnChangeStation.Text = "<->";
             this.btnChangeStation.UseVisualStyleBackColor = true;
             this.btnChangeStation.Click += new System.EventHandler(this.btnChangeStation_Click);
@@ -227,11 +229,11 @@
             // 
             this.dtStart.CustomFormat = "HH:mm";
             this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtStart.Location = new System.Drawing.Point(110, 109);
+            this.dtStart.Location = new System.Drawing.Point(110, 105);
             this.dtStart.Name = "dtStart";
             this.dtStart.Size = new System.Drawing.Size(101, 21);
-            this.dtStart.TabIndex = 25;
-            this.dtStart.Value = new System.DateTime(2023, 12, 7, 15, 43, 58, 0);
+            this.dtStart.TabIndex = 4;
+            this.dtStart.Value = new System.DateTime(2023, 12, 8, 0, 0, 0, 0);
             // 
             // dtEnd
             // 
@@ -240,7 +242,7 @@
             this.dtEnd.Location = new System.Drawing.Point(239, 109);
             this.dtEnd.Name = "dtEnd";
             this.dtEnd.Size = new System.Drawing.Size(101, 21);
-            this.dtEnd.TabIndex = 26;
+            this.dtEnd.TabIndex = 5;
             this.dtEnd.Value = new System.DateTime(2023, 12, 7, 15, 43, 58, 0);
             // 
             // btnStop
@@ -248,7 +250,7 @@
             this.btnStop.Location = new System.Drawing.Point(248, 240);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(202, 53);
-            this.btnStop.TabIndex = 27;
+            this.btnStop.TabIndex = 11;
             this.btnStop.Text = "STOP";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
@@ -261,7 +263,7 @@
             this.cbVIPRoom.Location = new System.Drawing.Point(375, 87);
             this.cbVIPRoom.Name = "cbVIPRoom";
             this.cbVIPRoom.Size = new System.Drawing.Size(72, 16);
-            this.cbVIPRoom.TabIndex = 28;
+            this.cbVIPRoom.TabIndex = 8;
             this.cbVIPRoom.Text = "특실예매";
             this.cbVIPRoom.UseVisualStyleBackColor = true;
             // 
@@ -273,7 +275,7 @@
             this.cbNormalRoom.Location = new System.Drawing.Point(375, 112);
             this.cbNormalRoom.Name = "cbNormalRoom";
             this.cbNormalRoom.Size = new System.Drawing.Size(72, 16);
-            this.cbNormalRoom.TabIndex = 29;
+            this.cbNormalRoom.TabIndex = 9;
             this.cbNormalRoom.Text = "일반예매";
             this.cbNormalRoom.UseVisualStyleBackColor = true;
             // 

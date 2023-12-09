@@ -30,6 +30,7 @@ namespace SRT_Ticketor
         private static bool stopThread = false;
         protected System.Threading.Thread runThread = null;
         private IWebDriver webDriver = null;
+
         #endregion
 
         #region Properties
@@ -70,40 +71,56 @@ namespace SRT_Ticketor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            dtPicker.Value = DateTime.Now;
+
+            dtStart.Value = DateTime.Now;
+            dtEnd.Value = DateTime.Now.AddHours(1);
         }
 
         public IWebDriver openBrowser()
         {
             IWebDriver driver = new ChromeDriver();
-            driver.Url = "https://etk.srail.kr/cmc/01/selectLoginForm.do";
-            // 대기 설정. (find로 객체를 찾을 때까지 검색이 되지 않으면 대기하는 시간 초단위)
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+            try
+            {
+                driver.Url = "https://etk.srail.kr/cmc/01/selectLoginForm.do";
+                // 대기 설정. (find로 객체를 찾을 때까지 검색이 되지 않으면 대기하는 시간 초단위)
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
 
-            driver.FindElement(By.XPath("//*[@id=\"srchDvCd3\"]")).Click();
+                driver.FindElement(By.XPath("//*[@id=\"srchDvCd3\"]")).Click();
 
-            driver.FindElement(By.Id("srchDvNm03")).SendKeys(ID);
-            driver.FindElement(By.Id("hmpgPwdCphd03")).SendKeys(Password);
-            var element = driver.FindElement(By.XPath("//*[@id=\"login-form\"]/fieldset/div[1]/div[1]/div[4]/div/div[2]/input"));
-            element.Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(4);
-            System.Threading.Thread.Sleep(10);
+                driver.FindElement(By.Id("srchDvNm03")).SendKeys(ID);
+                driver.FindElement(By.Id("hmpgPwdCphd03")).SendKeys(Password);
+                var element = driver.FindElement(By.XPath("//*[@id=\"login-form\"]/fieldset/div[1]/div[1]/div[4]/div/div[2]/input"));
+                element.Click();
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(4);
+                System.Threading.Thread.Sleep(10);
 
-            driver.Url = "https://etk.srail.kr/hpg/hra/01/selectScheduleList.do?pageId=TK0101010000";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                driver.Url = "https://etk.srail.kr/hpg/hra/01/selectScheduleList.do?pageId=TK0101010000";
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            driver.FindElement(By.Id("dptRsStnCdNm")).Clear();
-            driver.FindElement(By.Id("dptRsStnCdNm")).SendKeys(DepartureStation);
+                driver.FindElement(By.Id("dptRsStnCdNm")).Clear();
+                driver.FindElement(By.Id("dptRsStnCdNm")).SendKeys(DepartureStation);
 
-            driver.FindElement(By.Id("arvRsStnCdNm")).Clear();
-            driver.FindElement(By.Id("arvRsStnCdNm")).SendKeys(ArrivalStation);
-            string date = dtReserve.ToString("yyyyMMdd");
-            driver.FindElement(By.Id("dptDt")).SendKeys(date);
-            string searchHour = $"{((StartHour % 2 != 0) ? (StartHour - 1) : StartHour).ToString("00")}0000";
-            driver.FindElement(By.Id("dptTm")).SendKeys(searchHour);
+                driver.FindElement(By.Id("arvRsStnCdNm")).Clear();
+                driver.FindElement(By.Id("arvRsStnCdNm")).SendKeys(ArrivalStation);
+                string date = dtReserve.ToString("yyyyMMdd");
+                if(date != DateTime.Now.ToString("yyyyMMdd"))
+                {
+                    driver.FindElement(By.Id("dptDt")).SendKeys(date);
+                }
+                string searchHour = $"{((StartHour % 2 != 0) ? (StartHour - 1) : StartHour).ToString("00")}0000";
+                driver.FindElement(By.Id("dptTm")).SendKeys(searchHour);
 
-            element = driver.FindElement(By.XPath("//*[@id='search_top_tag']/input"));
-            element.Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                element = driver.FindElement(By.XPath("//*[@id='search_top_tag']/input"));
+                element.Click();
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            }
+            catch (Exception ex) 
+            {
+                driver.Quit();
+                MessageBox.Show(ex.Message );
+                return null; 
+            }
 
             return driver;
         }
@@ -159,6 +176,13 @@ namespace SRT_Ticketor
                 }
             }
 
+            if( (idxStart==-1) && (idxEnd==-1) )
+            {
+                WebDriver.Quit();
+                MessageBox.Show("출발시간을 재설정하세요");
+                return;
+            }
+
             bool isReserved = false;
             while (true)
             {
@@ -199,8 +223,11 @@ namespace SRT_Ticketor
 
                 if (isReserved)
                 {
-                    if(isAlertPresent())
+                    if (isAlertPresent())
+                    {
                         WebDriver.SwitchTo().Alert().Accept();
+                    }
+                    System.Threading.Thread.Sleep(2000);
                     WebDriver.Quit();
                     MessageBox.Show("예약 완료!");
                     break;
